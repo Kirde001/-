@@ -1,0 +1,6 @@
+/* для планшетов и фаблетов */
+@media (min-width: 481px) and (max-width:768px) {
+    body {
+        background-color: rgb(139, 197, 139);
+    }
+}

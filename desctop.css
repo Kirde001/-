@@ -1,0 +1,6 @@
+/* для декстопов */
+@media (min-width:769px) {
+    body,html {
+        background-color: rgb(79, 79, 175);
+    }
+}
