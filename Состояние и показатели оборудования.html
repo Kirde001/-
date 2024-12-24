@@ -37,6 +37,121 @@
             <div class="text">
                 <strong>Заключение главного инженера: показатели и состояние оборудования в пределах нормы, вмешательство не требуется.</strong>
             </div>
+
+
+
+
+            <form id="dataForm">
+                <table>
+                    <tr>
+                        <th>Показатель</th>
+                        <th>Значение</th>
+                    </tr>
+                    <tr>
+                        <td>Общее количество оборудования</td>
+                        <td>
+                            <input type="number" name="equipmentCount" value="150">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Уровень эксплуатации (%)</td>
+                        <td>
+                            <input type="number" name="exCount" value="85" max="100" min="10">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Плановые ремонты (%)</td>
+                        <td>
+                            <input type="number" name="workCount" value="10" max="100" min="10">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Энергоэффективность (сокращение)%</td>
+                        <td>
+                            <input type="number" name="energyCount" value="85" max="100" min="10">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Качество оборудования (сертифицировано)%</td>
+                        <td>
+                            <input type="number" name="qualityCount" value="92" max="100" min="10">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Инвестиции в модернизацию, млн рублей</td>
+                        <td>
+                            <input type="number" name="moneyCount" value="100">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Обучено сотрудников</td>
+                        <td>
+                            <input type="number" name="employeeCount" value="50">
+                        </td>
+                    </table>
+                <button type="submit">Обновить</button>
+            </form>
+        
+            <div id="results">
+                </div>
+        
+            <script>
+
+                const dataForm = document.getElementById('dataForm');
+                const resultsDiv = document.getElementById('results');
+        
+                dataForm.addEventListener('submit', (event) => {
+                    event.preventDefault(); 
+                    const formData = new FormData(dataForm);
+                    const equipmentCount = formData.get('equipmentCount');
+                    const exCount = formData.get('exCount');
+                    const workCount = formData.get('workCount');
+                    const energyCount = formData.get('energyCount');
+                    const qualityCount = formData.get('qualityCount');
+                    const moneyCount = formData.get('moneyCount');
+                    const employeeCount = formData.get('employeeCount');
+                    resultsDiv.innerHTML = `
+                        <table>
+                             <tr>
+                                <th>Показатель</th>
+                                <th>Значение</th>
+                            </tr>
+                            <tr>
+                                <td>Текущее общее количество оборудования: </td>
+                                <td>${equipmentCount}</td>
+                            </tr>
+                            <tr>
+                                <td>Уровень эксплуатации (%): </td>
+                                <td>${exCount}</td>
+                            </tr>
+                                                        <tr>
+                                <td>Плановые ремонты (%):</td>
+                                <td>${workCount}</td>
+                            </tr>
+                                                        <tr>
+                                <td>Энергоэффективность (сокращение)%:</td>
+                                <td>${energyCount}</td>
+                            </tr>
+                                                        <tr>
+                                <td>Качество оборудования (сертифицировано)%:</td>
+                                <td>${qualityCount}</td>
+                            </tr>
+                            <tr>
+                                <td>Инвестиции в модернизацию, млн рублей: </td>
+                                <td>${moneyCount}</td>
+                            </tr>
+                            <tr>
+                                <td>Обучено сотрудников: </td>
+                                <td>${employeeCount}</td>
+                            </tr>
+                        <table>
+                        `;
+                });
+            </script>
+
         </div>
+
+
+
     </body>
 </html>
