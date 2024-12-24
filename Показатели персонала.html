@@ -7,6 +7,69 @@
         <title> Инструкция главного инженера </title>
         <link rel="stylesheet" type="text/css" href="dectop.css" />
         <link rel="stylesheet" type="text/css" media="(max-device-width:480px)" href="mobile.css" />
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+            const addForm = document.getElementById("dataForm");
+            const tableBody = document.querySelector("table tbody");
+
+            addForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+        const formData = new FormData(addForm);
+        const newRowData = {
+            _1Count : formData.get('_1Count'),
+            _2Count : formData.get('_2Count'),
+            _3Count : formData.get('_3Count'),
+            _4Count : formData.get('_4Count'),
+            _5Count : formData.get('_5Count'),
+            _6Count : formData.get('_6Count'),
+            _7Count : formData.get('_7Count'),
+            };
+
+        const newRow = document.createElement("tr");
+                        newRow.innerHTML = `
+                            <td>${newRowData._1Count}</td>
+                            <td>${newRowData._2Count}</td>
+                            <td>${newRowData._3Count}</td>
+                            <td>${newRowData._4Count}</td>
+                            <td>${newRowData._5Count}</td>
+                            <td>${newRowData._6Count}</td>
+                            <td>${newRowData._7Count}</td>
+                        `;
+         tableBody.appendChild(newRow);
+
+                        saveToFile();
+                        addForm.reset();
+                    });
+
+
+        function saveToFile() {
+            let fileContent = "";
+            const rows = tableBody.querySelectorAll("tr");
+            rows.forEach(row => {
+                const cells = row.querySelectorAll("td");
+                fileContent += `${cells[0].innerText},`;
+                fileContent += `${cells[1].innerText},`;
+                fileContent += `${cells[2].innerText},`;
+                fileContent += `${cells[3].innerText},`;
+                fileContent += `${cells[4].innerText},`;
+                fileContent += `${cells[5].innerText}`;
+                fileContent += `${cells[6].innerText}`;
+                fileContent += `\r\n`;
+                fileContent += `\r\n`;
+            });
+
+        const blob = new Blob([fileContent], { type: "text/plain" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "data.txt";
+        link.click();
+    }
+});
+        </script>
+
+
     </head>
     <body>
         <div id="header">
@@ -58,112 +121,53 @@
             <img src="График1.png">
             <div class="text">
                 <strong>Заключение главного инженера: персонал показывает отличные результаты, вмешательство не требуется, таблицы для изменений:</strong>
+
                 <br>
                 <br>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Квалификация персонала</th>
+                        <th>Производительность</th>
+                        <th>Повышение квалификации, людям</th>
+                        <th>Энергоэффективность</th>
+                        <th>Качество</th>
+                        <th>Эффективность</th>
+                        <th>Проверки</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>90</td>
+                        <td>80</td>
+                        <td>50</td>
+                        <td>20</td>
+                        <td>100</td>
+                        <td>96</td>
+                        <td>2</td>
+                    </tr>
+                    </tbody>
+                </table>
                 <form id="dataForm">
-                    <table>
-                        <tr>
-                            <th>Показатель</th>
-                            <th>Значение</th>
-                        </tr>
-                        <tr>
-                            <td>Квалификация персонала % </td>
-                            <td>
-                                <input type="number" name="_1Count" value="96" max="100" min="0">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Производительность % </td>
-                            <td>
-                                <input type="number" name="_2Count" value="87" max="100" min="0" >
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Повышение квалификации, сотрудникам</td>
-                            <td>
-                                <input type="number" name="_3Count" value="60" ">
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Энергоэффективность %</td>
-                            <td>
-                                <input type="number" name="_4Count" value="80" max="100" min="10">
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Качество %</td>
-                            <td>
-                                <input type="number" name="_5Count" value="99" max="100" min="10">
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Обучение, сотрудников</td>
-                            <td>
-                                <input type="number" name="_6Count" value="15">
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Улучшение процессов %</td>
-                            <td>
-                                <input type="number" name="_7Count" value="95" max="100" min="10">
-                            </td>
-                        </table>
+
+                                <input type="number" name="_1Count" max="100" min="0">
+
+                                <input type="number" name="_2Count" max="100" min="0" >
+
+                                <input type="number" name="_3Count">
+
+                                <input type="number" name="_4Count" max="100" min="10">
+
+                                <input type="number" name="_5Count" max="100" min="10">
+
+                                <input type="number" name="_6Count">
+
+                                <input type="number" name="_7Count" max="100" min="10">
+
                     <button type="submit">Обновить</button>
                 </form>
                 <div id="results">
-                    </div>
-                <script>
-                    const dataForm = document.getElementById('dataForm');
-                    const resultsDiv = document.getElementById('results');
-                    dataForm.addEventListener('submit', (event) => {
-                        event.preventDefault(); 
-                        const formData = new FormData(dataForm);
-                        const _1Count = formData.get('_1Count');
-                        const _2Count = formData.get('_2Count');
-                        const _3Count = formData.get('_3Count');
-                        const _4Count = formData.get('_4Count');
-                        const _5Count = formData.get('_5Count');
-                        const _6Count = formData.get('_6Count');
-                        const _7Count = formData.get('_7Count');
-                        resultsDiv.innerHTML = `
-                            <table>
-                                 <tr>
-                                    <th>Показатель</th>
-                                    <th>Значение</th>
-                                </tr>
-                                <tr>
-                                    <td>Квалификация персонала %: </td>
-                                    <td>${_1Count}</td>
-                                </tr>
-                                <tr>
-                                    <td>Производительность %: </td>
-                                    <td>${_2Count}</td>
-                                </tr>
-                                                            <tr>
-                                    <td>Повышение квалификации, сотрудникам:</td>
-                                    <td>${_3Count}</td>
-                                </tr>
-                                                            <tr>
-                                    <td>Энергоэффективность %:</td>
-                                    <td>${_4Count}</td>
-                                </tr>
-                                                            <tr>
-                                    <td>Качество %:</td>
-                                    <td>${_5Count}</td>
-                                </tr>
-                                <tr>
-                                    <td>Обучение, сотрудников: </td>
-                                    <td>${_6Count}</td>
-                                </tr>
-                                <tr>
-                                    <td>Улучшение процессов %: </td>
-                                    <td>${_7Count}</td>
-                                </tr>
-                            <table>
-                                <br>
-                            `;
-                    });
-                </script>
+                </div>
             </div>
         </div>
     </body>
