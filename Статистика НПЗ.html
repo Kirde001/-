@@ -38,6 +38,110 @@
             <div class="text">
                 <strong>Заключение главного инженера: подразделения продолжают работу по плану, вмешательство в произведенные процессы не требуется.</strong>
             </div>
+            <form id="dataForm">
+                <table>
+                    <tr>
+                        <th>Показатель</th>
+                        <th>Значение</th>
+                    </tr>
+                    <tr>
+                        <td>Объем переработки нефти (тонн)</td>
+                        <td>
+                            <input type="number" name="_1Count" value="2500000">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Производство бензина (тонн)</td>
+                        <td>
+                            <input type="number" name="_2Count" value="1000000">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Производство дизельного топлива (тонн)</td>
+                        <td>
+                            <input type="number" name="_3Count" value="800000" ">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Качество продукции (%)</td>
+                        <td>
+                            <input type="number" name="_4Count" value="97" max="100" min="10">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Энергетические затраты (МВт)</td>
+                        <td>
+                            <input type="number" name="_5Count" value="1200" max="3000" min="10">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Выбросы CO2 (%)</td>
+                        <td>
+                            <input type="number" name="_6Count" value="3" min="0" max="100">
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Инвестиции в модернизацию (млн руб.)</td>
+                        <td>
+                            <input type="number" name="_7Count" value="150">
+                        </td>
+                    </table>
+                <button type="submit">Обновить</button>
+            </form>
+            <div id="results">
+                </div>
+            <script>
+                const dataForm = document.getElementById('dataForm');
+                const resultsDiv = document.getElementById('results');
+                dataForm.addEventListener('submit', (event) => {
+                    event.preventDefault(); 
+                    const formData = new FormData(dataForm);
+                    const _1Count = formData.get('_1Count');
+                    const _2Count = formData.get('_2Count');
+                    const _3Count = formData.get('_3Count');
+                    const _4Count = formData.get('_4Count');
+                    const _5Count = formData.get('_5Count');
+                    const _6Count = formData.get('_6Count');
+                    const _7Count = formData.get('_7Count');
+                    resultsDiv.innerHTML = `
+                        <table>
+                             <tr>
+                                <th>Показатель</th>
+                                <th>Значение</th>
+                            </tr>
+                            <tr>
+                                <td>Объем переработки нефти (тонн): </td>
+                                <td>${_1Count}</td>
+                            </tr>
+                            <tr>
+                                <td>Производство бензина (тонн): </td>
+                                <td>${_2Count}</td>
+                            </tr>
+                                                        <tr>
+                                <td>Производство дизельного топлива (тонн):</td>
+                                <td>${_3Count}</td>
+                            </tr>
+                                                        <tr>
+                                <td>Качество продукции (%):</td>
+                                <td>${_4Count}</td>
+                            </tr>
+                                                        <tr>
+                                <td>Энергетические затраты (МВт):</td>
+                                <td>${_5Count}</td>
+                            </tr>
+                            <tr>
+                                <td>Выбросы CO2 (%): </td>
+                                <td>${_6Count}</td>
+                            </tr>
+                            <tr>
+                                <td>Инвестиции в модернизацию (млн руб.): </td>
+                                <td>${_7Count}</td>
+                            </tr>
+                        <table>
+                            <br>
+                        `;
+                });
+            </script>
         </div>
     </body>
 </html>

@@ -37,10 +37,6 @@
             <div class="text">
                 <strong>Заключение главного инженера: показатели и состояние оборудования в пределах нормы, вмешательство не требуется.</strong>
             </div>
-
-
-
-
             <form id="dataForm">
                 <table>
                     <tr>
@@ -91,15 +87,11 @@
                     </table>
                 <button type="submit">Обновить</button>
             </form>
-        
             <div id="results">
                 </div>
-        
             <script>
-
                 const dataForm = document.getElementById('dataForm');
                 const resultsDiv = document.getElementById('results');
-        
                 dataForm.addEventListener('submit', (event) => {
                     event.preventDefault(); 
                     const formData = new FormData(dataForm);
@@ -148,10 +140,6 @@
                         `;
                 });
             </script>
-
         </div>
-
-
-
     </body>
 </html>
